@@ -8,8 +8,8 @@ contract ETH {
         rootAdmin = msg.sender;
     }
 
-    function sendEth(address _receiver) external payable {
-        require(msg.value > 0, "ETH: Not enough eth to send");
+    function sendEth(address _receiver, uint256 amount) external payable {
+        require(msg.value >= amount, "ETH: Not enough eth to send");
 
         (bool sent, ) = _receiver.call{value: msg.value}("");
         require(sent, "Failed to send Ether");
